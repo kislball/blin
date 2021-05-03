@@ -1,21 +1,34 @@
 import { Controller, ErrorHandler, GET } from "fastify-decorators"
 import { FastifyReply, FastifyRequest } from "fastify"
-
-class NoAccess extends Error {}
+import AuthError from "../lib/errors/AuthError"
+import AlreadyExistsError from "../lib/errors/AlreadyExistsError"
+import ValidateError from "../lib/errors/ValidateError";
 
 @Controller()
 export default class BaseController {
-  @GET('/easteregg')
-  getEasterEgg() {
-    throw new NoAccess('no access to easter egg sry')
-    return 'abcde'
+  @ErrorHandler(AuthError)
+  unAuthorizedHandler(error: Error, request: FastifyRequest, reply: FastifyReply) {
+    reply.status(401).send({
+      code: 401,
+      message: 'Unauthorized',
+      details: error.message
+    })
   }
 
-  @ErrorHandler(NoAccess)
-  noAccessHandler(error: Error, request: FastifyRequest, reply: FastifyReply) {
-    reply.status(403).send({
-      code: 403,
-      message: 'No access',
+  @ErrorHandler(AlreadyExistsError)
+  conflictHandler(error: Error, request: FastifyRequest, reply: FastifyReply) {
+    reply.status(409).send({
+      code: 409,
+      message: 'Conflict',
+      details: error.message
+    })
+  }
+
+  @ErrorHandler(ValidateError)
+  validateErrorHandler(error: Error, request: FastifyRequest, reply: FastifyReply) {
+    reply.status(400).send({
+      code: 400,
+      message: 'Bad request',
       details: error.message
     })
   }
@@ -24,7 +37,8 @@ export default class BaseController {
   errorHandler(error: Error, request: FastifyRequest, reply: FastifyReply) {
     reply.status(500).send({
       code: 500,
-      message: 'Oopsie! We\'ve detected an internal error! '
+      message: 'Oopsie! We\'ve detected an internal error!',
+      details: error.name
     })
   }
 }
