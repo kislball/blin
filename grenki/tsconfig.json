@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "outDir": "./dist",
+    "experimentalDecorators": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "./api/**/*.ts",
+    "./lib/**/*.ts",
+    "./model/**/*.ts",
+    "./bootstrap.ts"
+  ]
+}

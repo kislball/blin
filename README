@@ -1,0 +1,18 @@
+Blin is a simple social network which ia aimed at simplicity
+and giving everyone attention. How have we achieved this? We
+don't have recommendations system at all. All posts are sorted
+by newest ones.
+
+Blin is splitted into blins - a special community, where
+everyone can create posts and comment them. You can interpret
+it as something like subreddits.
+
+Blin's source code is splitted into two parts - grenki(ru - гренки)
+and oladya(ru - оладья). Oladya is Vue 3 frontend and grenki
+is Nest backend.
+
+Blin will always be free. It is opensource and every contributor
+matters! It is licensed under GNU GPL v3(see LICENSE file for
+more details.)
+
+See doc folder for all details you might need.

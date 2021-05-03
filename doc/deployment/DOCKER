@@ -1,0 +1,5 @@
+By default, Blin is deployed using Docker containers. We provide
+docker-compose.yml for deployment.
+
+To start an application without swarm, use `docker-compose up` command
+in the directory with Blin and you are ready to go!
