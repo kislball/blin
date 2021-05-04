@@ -37,14 +37,14 @@ export default class BaseController {
     })
   }
 
-  @ErrorHandler(TypeError)
-  typeErrorHandler(error: Error, request: FastifyRequest, reply: FastifyReply) {
-    reply.status(400).send({
-      code: 400,
-      message: 'Bad request',
-      details: 'Details unknown',
-    })
-  }
+  // @ErrorHandler(TypeError)
+  // typeErrorHandler(error: Error, request: FastifyRequest, reply: FastifyReply) {
+  //   reply.status(400).send({
+  //     code: 400,
+  //     message: 'Bad request',
+  //     details: 'Details unknown',
+  //   })
+  // }
 
   @ErrorHandler()
   errorHandler(error: Error, request: FastifyRequest, reply: FastifyReply) {

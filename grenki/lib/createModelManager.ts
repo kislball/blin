@@ -4,6 +4,7 @@ import CommentModel from '../model/CommentModel'
 import PostModel from '../model/PostModel'
 import UserModel from '../model/UserModel'
 import logger from './logger'
+import CommunityModel from "../model/CommunityModel"
 
 export default async function createModelManager(mongoUri: string) {
   const l = logger('database')
@@ -18,5 +19,5 @@ export default async function createModelManager(mongoUri: string) {
   }
 
   l.success('Connected to Mongo!')
-  return new ModelManager(connection!, [CommentModel, CommentModel, PostModel, UserModel])
+  return new ModelManager(connection!, [CommentModel, CommunityModel, PostModel, UserModel])
 }

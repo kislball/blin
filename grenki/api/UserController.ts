@@ -42,6 +42,6 @@ export default class UserController extends BaseController {
     const { username, password } = request.body
     if (!username || !password) throw new ValidateError('no creds were provided')
     await BaseController.model.get<UserModel>('UserModel')!.register(username, password)
-    reply.status(201)
+    reply.status(201).send({ success: true })
   }
 }

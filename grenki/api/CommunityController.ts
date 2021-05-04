@@ -21,7 +21,7 @@ export default class CommunityController extends BaseController {
     throw new NotFoundError(`community with id ${id} doesn't exist`)
   }
 
-  @POST('/:id')
+  @POST('/')
   async createCommunity(request: FastifyRequest, reply: FastifyReply) {
     if (!request.headers.authorization) throw new AuthError()
     await authorize(request.headers.authorization, BaseController.model.get<UserModel>('UserModel')!)
@@ -29,6 +29,6 @@ export default class CommunityController extends BaseController {
     const { name, description } = request.body
     if (!name || !description) throw new ValidateError('name and/or description weren\'t provided')
     await BaseController.model.get<CommunityModel>('CommunityModel')!.create(name, description)
-    reply.status(201)
+    reply.status(201).send({ success: true })
   }
 }
