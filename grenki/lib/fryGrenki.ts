@@ -7,7 +7,7 @@ import fastifyHelmet from "fastify-helmet"
 import fastifyCors from "fastify-cors"
 import createModelManager from "./createModelManager"
 import cfg from "./cfg"
-import BaseController from "../api/BaseController";
+import BaseController from "../api/BaseController"
 
 /**
  * Create the application

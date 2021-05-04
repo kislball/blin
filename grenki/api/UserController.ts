@@ -4,6 +4,8 @@ import UserModel from "../model/UserModel"
 import BaseController from "./BaseController"
 import ValidateError from "../lib/errors/ValidateError"
 import AuthError from "../lib/errors/AuthError"
+import NotFoundError from "../lib/errors/NotFoundError"
+import encodeCreds from "../lib/base64/encodeCreds";
 
 @Controller('/users')
 export default class UserController extends BaseController {
@@ -15,7 +17,10 @@ export default class UserController extends BaseController {
     const validated = await BaseController.model.get<UserModel>('UserModel')!.checkCreds(username, password)
     if(validated) {
       reply.status(200)
-      return { success: true }
+      return {
+        success: true,
+        creds: encodeCreds(username, password)
+      }
     } else {
       throw new AuthError()
     }
@@ -26,7 +31,11 @@ export default class UserController extends BaseController {
     // @ts-ignore
     const usr = request.params.id
     const exists = await BaseController.model.get<UserModel>('UserModel')!.exists(usr)
-    return exists ? { username: usr } : null
+    if(exists) {
+      return { username: usr }
+    } else {
+      throw new NotFoundError(`user with username ${usr} doesn't exist`)
+    }
   }
 
   @POST('/')
@@ -35,6 +44,6 @@ export default class UserController extends BaseController {
     const { username, password } = request.body
     if(!username || !password) throw new ValidateError('no creds were provided')
     await BaseController.model.get<UserModel>('UserModel')!.register(username, password)
-    reply.status(204)
+    reply.status(201)
   }
 }
