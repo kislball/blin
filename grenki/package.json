@@ -2,6 +2,7 @@
   "private": true,
   "version": "0.1.0-beta1",
   "devDependencies": {
+    "@types/node": "^15.0.1",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "eslint": "^7.25.0",
@@ -14,7 +15,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start:ts-node": "ts-node ./bootstrap.ts",
+    "start:ts-node": "ts-node --project ./tsconfig.json ./bootstrap.ts",
     "start": "npm run build && node dist/bootstrap.js",
     "lint": "eslint . --fix"
   },
@@ -25,6 +26,7 @@
     "fastify": "^3.15.1",
     "fastify-cors": "^6.0.0",
     "fastify-decorators": "^3.9.1",
+    "fastify-helmet": "^5.3.1",
     "mongodb": "^3.6.6",
     "nanoid": "^3.1.22"
   }

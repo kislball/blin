@@ -14,6 +14,8 @@
     "./api/**/*.ts",
     "./lib/**/*.ts",
     "./model/**/*.ts",
+    "./checks/**/*.ts",
+    "./global.ts",
     "./bootstrap.ts"
   ]
 }
