@@ -1,7 +1,7 @@
-import BaseModel from "./BaseModel"
-import ValidateError from "../lib/errors/ValidateError"
-import CommunityDTO from "../dto/CommunityDTO"
-import AlreadyExistsError from "../lib/errors/AlreadyExistsError"
+import BaseModel from './BaseModel'
+import ValidateError from '../lib/errors/ValidateError'
+import CommunityDTO from '../dto/CommunityDTO'
+import AlreadyExistsError from '../lib/errors/AlreadyExistsError'
 
 export default class CommunityModel extends BaseModel {
   getCollection() {
@@ -14,7 +14,7 @@ export default class CommunityModel extends BaseModel {
     }
 
     const col = this.getCollection()
-    const found = await col.findOne({name})
+    const found = await col.findOne({ name })
     if (found) throw new AlreadyExistsError('community with that name already exists')
 
     await col.insertOne({ name, description })

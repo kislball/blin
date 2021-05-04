@@ -1,13 +1,13 @@
-import fastify from "fastify"
-import { bootstrap } from "fastify-decorators"
-import logger from "./logger"
-import pkg from "../package.json"
-import os from "os"
-import fastifyHelmet from "fastify-helmet"
-import fastifyCors from "fastify-cors"
-import createModelManager from "./createModelManager"
-import cfg from "./cfg"
-import BaseController from "../api/BaseController"
+import fastify from 'fastify'
+import { bootstrap } from 'fastify-decorators'
+import os from 'os'
+import fastifyHelmet from 'fastify-helmet'
+import fastifyCors from 'fastify-cors'
+import pkg from '../package.json'
+import logger from './logger'
+import createModelManager from './createModelManager'
+import cfg from './cfg'
+import BaseController from '../api/BaseController'
 
 /**
  * Create the application
@@ -16,7 +16,7 @@ import BaseController from "../api/BaseController"
 export default async function fryGrenki(port = 9017, ...controllers: any[]) {
   const start = new Date()
 
-  const l = logger("frying pan")
+  const l = logger('frying pan')
   l.log(`Frying Grenki v${pkg.version}`)
   const app = fastify()
 
@@ -25,7 +25,7 @@ export default async function fryGrenki(port = 9017, ...controllers: any[]) {
   })
 
   app.register(bootstrap, {
-    controllers
+    controllers,
   })
   app.register(fastifyHelmet, {})
   app.register(fastifyCors, { origin: '*' })
@@ -36,7 +36,7 @@ export default async function fryGrenki(port = 9017, ...controllers: any[]) {
 
   await app.listen(port)
 
-  if(!cfg().mongoConnectUrl || !cfg().mongoDatabase) {
+  if (!cfg().mongoConnectUrl || !cfg().mongoDatabase) {
     l.error('Incorrect configuration provided, cannot connect to Mongo.')
     process.exit(-1)
   }

@@ -1,6 +1,6 @@
-import { Controller, GET } from "fastify-decorators"
-import BaseController from "./BaseController"
-import pkg from "../package.json"
+import { Controller, GET } from 'fastify-decorators'
+import BaseController from './BaseController'
+import pkg from '../package.json'
 
 @Controller('/instance')
 export default class InstanceVersionController extends BaseController {

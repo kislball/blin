@@ -16,5 +16,10 @@ module.exports = {
   ],
   rules: {
     semi: ['error', 'never'],
+    'no-restricted-syntax': 'off',
+    'import/extensions': 'off',
+    'import/no-unresolved': 'off',
+    'class-methods-use-this': 'off',
+    'no-console': 'off'
   },
 }

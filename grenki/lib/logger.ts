@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import chalk from 'chalk'
 
 export default function logger(name = 'blin') {
   const instance = {
@@ -22,7 +22,7 @@ export default function logger(name = 'blin') {
     success(...text: string[]) {
       const t = text.join(', ')
       instance.create('green', 'SUCCESS', t)
-    }
+    },
   }
 
   return instance

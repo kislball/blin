@@ -1,5 +1,5 @@
-import BaseModel from "./BaseModel"
-import PostDTO from "../dto/PostDTO"
+import BaseModel from './BaseModel'
+import PostDTO from '../dto/PostDTO'
 
 export default class PostModel extends BaseModel {
   getCollection() {
@@ -10,7 +10,7 @@ export default class PostModel extends BaseModel {
     title: string,
     content: string,
     author: string,
-    community: string
+    community: string,
   ) {
     const id = this.getId()
 
@@ -20,7 +20,7 @@ export default class PostModel extends BaseModel {
       content,
       id,
       author,
-      date: new Date().toString()
+      date: new Date().toString(),
     })
   }
 

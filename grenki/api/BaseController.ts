@@ -1,10 +1,10 @@
-import { Controller, ErrorHandler, GET } from "fastify-decorators"
-import { FastifyReply, FastifyRequest } from "fastify"
-import AuthError from "../lib/errors/AuthError"
-import AlreadyExistsError from "../lib/errors/AlreadyExistsError"
-import ValidateError from "../lib/errors/ValidateError"
-import ModelManager from "../model/ModelManager"
-import logger from "../lib/logger"
+import { Controller, ErrorHandler } from 'fastify-decorators'
+import { FastifyReply, FastifyRequest } from 'fastify'
+import AuthError from '../lib/errors/AuthError'
+import AlreadyExistsError from '../lib/errors/AlreadyExistsError'
+import ValidateError from '../lib/errors/ValidateError'
+import ModelManager from '../model/ModelManager'
+import logger from '../lib/logger'
 
 @Controller()
 export default class BaseController {
@@ -15,7 +15,7 @@ export default class BaseController {
     reply.status(401).send({
       code: 401,
       message: 'Unauthorized',
-      details: error.message
+      details: error.message,
     })
   }
 
@@ -24,7 +24,7 @@ export default class BaseController {
     reply.status(409).send({
       code: 409,
       message: 'Conflict',
-      details: error.message
+      details: error.message,
     })
   }
 
@@ -33,7 +33,7 @@ export default class BaseController {
     reply.status(400).send({
       code: 400,
       message: 'Bad request',
-      details: error.message
+      details: error.message,
     })
   }
 
@@ -42,7 +42,7 @@ export default class BaseController {
     reply.status(400).send({
       code: 400,
       message: 'Bad request',
-      details: 'Details unknown'
+      details: 'Details unknown',
     })
   }
 
@@ -51,7 +51,7 @@ export default class BaseController {
     reply.status(500).send({
       code: 500,
       message: 'Oopsie! We\'ve detected an internal error!',
-      details: error.name
+      details: error.name,
     })
     logger('BaseController').error('Internal server error!', error.message)
   }

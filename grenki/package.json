@@ -17,7 +17,7 @@
     "build": "tsc",
     "start:ts-node": "ts-node --project ./tsconfig.json ./bootstrap.ts",
     "start": "npm run build && node dist/bootstrap.js",
-    "lint": "eslint . --fix"
+    "lint": "eslint ./lib/**/*.ts ./api/**/*.ts ./checks/**/*.ts ./dto/**/*.ts ./model/**/*.ts ./bootstrap.ts --fix"
   },
   "dependencies": {
     "@types/mongodb": "^3.6.12",

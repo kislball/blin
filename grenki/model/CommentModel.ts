@@ -1,5 +1,5 @@
-import BaseModel from "./BaseModel"
-import CommentDTO from "../dto/CommentDTO"
+import BaseModel from './BaseModel'
+import CommentDTO from '../dto/CommentDTO'
 
 export default class CommentModel extends BaseModel {
   getCollection() {
@@ -9,7 +9,7 @@ export default class CommentModel extends BaseModel {
   async create(
     content: string,
     author: string,
-    post: string
+    post: string,
   ) {
     const id = this.getId()
     await this.getCollection().insertOne({
@@ -17,7 +17,7 @@ export default class CommentModel extends BaseModel {
       author,
       post,
       id,
-      date: new Date().toString()
+      date: new Date().toString(),
     })
   }
 
@@ -29,4 +29,3 @@ export default class CommentModel extends BaseModel {
     return this.getCollection().find({ post }).toArray()
   }
 }
-
