@@ -14,6 +14,8 @@ import BaseController from "../api/BaseController";
  * @param port - port to run application on
  */
 export default async function fryGrenki(port = 9017, ...controllers: any[]) {
+  const start = new Date()
+
   const l = logger("frying pan")
   l.log(`Frying Grenki v${pkg.version}`)
   const app = fastify()
@@ -48,6 +50,8 @@ export default async function fryGrenki(port = 9017, ...controllers: any[]) {
   l.log(`\tOS - ${os.platform()}`)
   l.log(`\tArchitecture - ${os.arch()}`)
   l.log(`\tPort - ${port}`)
+
+  l.success(`Grenki is ready to go! Took ${new Date().getTime() - start.getTime()}ms to fry them`)
 
   return app
 }
