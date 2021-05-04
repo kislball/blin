@@ -18,6 +18,8 @@ export default class CommunityModel extends BaseModel {
     if (found) throw new AlreadyExistsError('community with that name already exists')
 
     await col.insertOne({ name, description })
+
+    return { id: name }
   }
 
   async get(name: string): Promise<CommunityDTO | null> {

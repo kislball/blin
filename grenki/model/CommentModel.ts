@@ -19,6 +19,8 @@ export default class CommentModel extends BaseModel {
       id,
       date: new Date().toString(),
     })
+
+    return { id }
   }
 
   async get(id: string) {

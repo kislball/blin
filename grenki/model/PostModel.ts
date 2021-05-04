@@ -22,6 +22,8 @@ export default class PostModel extends BaseModel {
       author,
       date: new Date().toString(),
     })
+
+    return { id }
   }
 
   async get(id: string) {

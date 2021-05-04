@@ -21,6 +21,8 @@ export default class UserModel extends BaseModel {
     const hashed = await argon2.hash(password)
 
     await this.getCollection().insertOne({ username, password: hashed })
+
+    return { id: username }
   }
 
   async get(username: string) {
