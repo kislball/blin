@@ -1,5 +1,4 @@
 import fastify from 'fastify'
-import { bootstrap } from 'fastify-decorators'
 import os from 'os'
 import fastifyHelmet from 'fastify-helmet'
 import fastifyCors from 'fastify-cors'
@@ -7,13 +6,13 @@ import pkg from '../package.json'
 import logger from './logger'
 import createModelManager from './createModelManager'
 import cfg from './cfg'
-import BaseController from '../api/BaseController'
+import bootstrap from '../api/bootstrap'
 
 /**
  * Create the application
  * @param port - port to run application on
  */
-export default async function fryGrenki(port = 9017, ...controllers: any[]) {
+export default async function fryGrenki(port = 9017) {
   const start = new Date()
 
   const l = logger('frying pan')
@@ -24,9 +23,7 @@ export default async function fryGrenki(port = 9017, ...controllers: any[]) {
     l.log('Exiting...')
   })
 
-  app.register(bootstrap, {
-    controllers,
-  })
+  app.register(bootstrap)
   app.register(fastifyHelmet, {})
   app.register(fastifyCors, { origin: '*' })
 
@@ -42,7 +39,6 @@ export default async function fryGrenki(port = 9017, ...controllers: any[]) {
   }
 
   const modelManager = await createModelManager(cfg().mongoConnectUrl!)
-  BaseController.model = modelManager
 
   l.log('Useful information:')
   l.log(`\tVersion - ${pkg.version}`)

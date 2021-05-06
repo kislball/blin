@@ -4,7 +4,7 @@ import CommentModel from '../model/CommentModel'
 import PostModel from '../model/PostModel'
 import UserModel from '../model/UserModel'
 import logger from './logger'
-import CommunityModel from "../model/CommunityModel"
+import CommunityModel from '../model/CommunityModel'
 
 export default async function createModelManager(mongoUri: string) {
   const l = logger('database')

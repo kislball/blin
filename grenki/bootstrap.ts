@@ -1,7 +1,4 @@
 import fryGrenki from './lib/fryGrenki'
-import InstanceVersionController from './api/InstanceVersionController'
 import cfg from './lib/cfg'
-import UserController from './api/UserController'
-import CommunityController from './api/CommunityController'
 
-fryGrenki(cfg().port ?? 9017, InstanceVersionController, UserController, CommunityController)
+fryGrenki(cfg().port ?? 9017)
