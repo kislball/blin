@@ -9,7 +9,7 @@ it as something like subreddits.
 
 Blin's source code is splitted into two parts - grenki(ru - гренки)
 and oladya(ru - оладья). Oladya is Vue 3 frontend and grenki
-is Nest backend.
+is Fastify backend.
 
 Blin will always be free. It is opensource and every contributor
 matters! It is licensed under GNU GPL v3(see LICENSE file for
