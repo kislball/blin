@@ -1,5 +1,0 @@
-Grenki is Blin's backend. It uses fastify to maximize speed
-and make API responsive.
-
-It uses `fastify-decorators` package to provide a really neat
-API to developers.

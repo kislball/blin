@@ -1,7 +1,0 @@
-Grenki server has several folders inside -
-* api - controllers are stored here
-* lib - various utilities
-* model - describes database storage
-* dto - describes data stored
-* checks - part of model, used to do complex checks, e.g. ability to
-comment post only if it exists

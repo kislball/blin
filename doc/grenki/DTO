@@ -1,2 +1,0 @@
-All dates in DTOs are created by calling Date#toString method,
-not by storing unix timestamp or stuff.
