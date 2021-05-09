@@ -8,14 +8,14 @@
     "esModuleInterop": true,
     "outDir": "./dist",
     "experimentalDecorators": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "typeRoots": ["@types"]
   },
   "include": [
     "./api/**/*.ts",
     "./lib/**/*.ts",
     "./model/**/*.ts",
     "./checks/**/*.ts",
-    "./global.ts",
     "./bootstrap.ts"
   ]
 }

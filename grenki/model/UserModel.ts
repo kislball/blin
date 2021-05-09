@@ -15,32 +15,32 @@ export default class UserModel extends BaseModel {
       throw new ValidateError('username cannot contain characters other than A-Z, a-z, underscores and numbers')
     }
 
-    const exists = await this.exists(username)
-    if (exists) throw new AlreadyExistsError('user with that username already exists')
+    const exists = await this.exists(username.toLowerCase())
+    if (exists || username === 'login') throw new AlreadyExistsError('user with that username already exists')
 
     const hashed = await argon2.hash(password)
 
-    await this.getCollection().insertOne({ username, password: hashed })
+    await this.getCollection().insertOne({ username: username.toLowerCase(), password: hashed })
 
-    return { id: username }
+    return { id: username.toLowerCase() }
   }
 
   async get(username: string) {
-    return this.getCollection().findOne({ username })
+    return this.getCollection().findOne({ username: username.toLowerCase() })
   }
 
   async checkCreds(username: string, password: string) {
-    const exists = await this.exists(username)
+    const exists = await this.exists(username.toLowerCase())
     if (!exists) throw new AuthError('user doesn\'t exist')
 
-    const dbUser = await this.get(username)
+    const dbUser = await this.get(username.toLowerCase())
     const passCorrect = await argon2.verify(dbUser!.password, password)
     if (passCorrect) return true
     return false
   }
 
   async exists(username: string): Promise<boolean> {
-    const r = await this.getCollection().findOne({ username })
+    const r = await this.getCollection().findOne({ username: username.toLowerCase() })
     return !!r
   }
 }

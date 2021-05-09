@@ -27,18 +27,20 @@ export default async function fryGrenki(port = 9017) {
   app.register(fastifyHelmet, {})
   app.register(fastifyCors, { origin: '*' })
 
-  app.ready(() => {
-    l.success('Grenki webserver is up and running!')
-  })
-
-  await app.listen(port)
-
   if (!cfg().mongoConnectUrl || !cfg().mongoDatabase) {
     l.error('Incorrect configuration provided, cannot connect to Mongo.')
     process.exit(-1)
   }
 
   const modelManager = await createModelManager(cfg().mongoConnectUrl!)
+  app.decorate('model', modelManager)
+
+  app.listen(port, (err) => {
+    if(err) {
+      l.error(`Could not start grenki webserver! ${err.name} - ${err.message}`)
+      process.exit(-1)
+    }
+  })
 
   l.log('Useful information:')
   l.log(`\tVersion - ${pkg.version}`)
