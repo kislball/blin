@@ -36,7 +36,7 @@ export default async function fryGrenki(port = 9017) {
   app.decorate('model', modelManager)
 
   app.listen(port, (err) => {
-    if(err) {
+    if (err) {
       l.error(`Could not start grenki webserver! ${err.name} - ${err.message}`)
       process.exit(-1)
     }

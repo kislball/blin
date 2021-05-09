@@ -1,11 +1,10 @@
-import { FastifyInstance } from 'fastify'
+import { FastifyInstance, FastifyError } from 'fastify'
+import fp from 'fastify-plugin'
 import AlreadyExistsError from '../../lib/errors/AlreadyExistsError'
 import error from '../../lib/error'
 import AuthError from '../../lib/errors/AuthError'
 import NotFoundError from '../../lib/errors/NotFoundError'
 import ValidateError from '../../lib/errors/ValidateError'
-import fp from 'fastify-plugin'
-import { FastifyError } from "fastify";
 
 async function errorHandler(fastify: FastifyInstance) {
   fastify.setErrorHandler((err, req, res) => {
@@ -17,7 +16,7 @@ async function errorHandler(fastify: FastifyInstance) {
       res.status(404).send(error(404, 'Not found', err.message))
     } else if (err instanceof ValidateError || err.validation) {
       res.status(400).send(error(400, 'Bad request', err.message))
-    } else if(err.name === 'FastifyError') {
+    } else if (err.name === 'FastifyError') {
       res.status(400).send(error(400, 'Bad request', err.message))
     } else {
       res.status(500).send(error(500, 'Internal server error', 'Oopsie! Looks like'
