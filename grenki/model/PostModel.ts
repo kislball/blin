@@ -34,4 +34,8 @@ export default class PostModel extends BaseModel {
     const r = await this.get(id)
     return !!r
   }
+
+  async getAllOnCommunity(community: string) {
+    return this.getCollection().find({ community }).toArray()
+  }
 }
