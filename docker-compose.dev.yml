@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  adminer:
+    restart: unless-stopped
+    image: adminer
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.adminer.rule=Host(`${ADMINER_HOST}`)
+      - traefik.http.routers.adminer.entrypoints=web
+      - traefik.http.services.adminer.loadbalancer.server.port=8080
+  postgres:
+    restart: unless-stopped
+    image: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_DB: blin
+  app:
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.app.rule=Host(`${APP_HOST}`)
+      - traefik.http.routers.app.entrypoints=web
+      - traefik.http.services.app.loadbalancer.server.port=8080
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: blin/backend
+  traefik:
+    restart: unless-stopped
+    image: traefik:v2.4
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.rule=Host(`${TRAEFIK_HOST}`)
+      - traefik.http.routers.traefik.entrypoints=web
+      - traefik.http.services.traefik.loadbalancer.server.port=8080
+    ports:
+      - 80:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+
+volumes:
+  postgres:
